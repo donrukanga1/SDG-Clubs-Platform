@@ -1,0 +1,8 @@
+{
+  "name": "SDGs KAP10",
+  "description": "Uganda's SDGs Intelligence platform. A behavioral assessment and learning system for youth-led SDG action.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

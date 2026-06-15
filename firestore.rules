@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reusable, hardened global security helpers
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+
+    // Clubs Collection Rules
+    match /clubs/{clubId} {
+      allow read: if true;
+      // In sandbox mode/dev environment, let users register and update profile states
+      allow write: if true;
+    }
+
+    // Courses Collection Rules
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Lounge Messages Rules
+    match /loungeMessages/{msgId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
